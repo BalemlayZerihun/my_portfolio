@@ -1,168 +1,340 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <title>Balemlay Zerihun | Portfolio</title>
-
-<!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, blue);
+body{
+margin:0;
+font-family:Segoe UI, sans-serif;
+background:linear-gradient(to right, #0f2027, #203a43, #2c5364);
+color:white;
+overflow-x:hidden;
 }
 
-header {
-    text-align: center;
-    color:orange;
-    padding: 20px;
+.header{
+background:#0b1c26;
+text-align:center;
+padding:20px;
+position:relative;
 }
 
-header img {
-    margin-top: 15px;
-    width: 180px;
-    border-radius: 50%;
-    border: 5px solid white;
+.profile-photo{
+width:100px;
+height:100px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid white;
+cursor:pointer;
+transition:0.3s;
 }
 
-.menu {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    background: linear-gradient(to right, green,yellow,red);
-    padding: 10px;
+.profile-photo:hover{ transform:scale(1.05); }
+#profileInput{ display:none; }
+
+.menu{
+display:none;
+justify-content:center;
+background:#08131a;
+flex-wrap:wrap;
 }
 
-.menu a {
-    width: 110px;
-    height: 110px;
-    margin: 15px;
-    background: #111;
-    border-radius: 15px;
-    color: #00e5ff;
-    text-decoration: none;
-    text-align: center;
-    padding-top: 10px;
-    font-size: 15px;
-    font-weight: bold;
-    transition: 0.3s;
+.menu a{
+color:white;
+padding:14px 18px;
+text-decoration:none;
+transition:0.3s;
 }
 
-.menu a:hover {
-    background: green;
-    color: black;
-    transform: scale(1.05);
+.menu a:hover{ background:#1e90ff; }
+
+.section{
+display:none;
+padding:50px 20px;
+text-align:center;
+min-height:70vh;
+opacity:0;
+transition:opacity 0.5s ease;
+position:relative;
 }
 
-section {
-    background: blue;
-    margin: 5px;
-    padding: 100px;
-    border-radius: 4px;
+.section.active{
+display:block;
+opacity:1;
 }
 
-h2 {
-    color: red;
+.login-corner-btn{
+position:absolute;
+top:20px;
+right:20px;
+padding:10px 20px;
+background:#2ecc71;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
 }
 
-.project {
-    background: green;
-    padding: 15px;
-    border-radius: 10px;
-    margin: 15px 0;
+.card{
+background:#0b1c26;
+width:320px;
+margin:40px auto;
+padding:30px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.5);
 }
 
-.social img {
-    width: 60px;
-    margin: 10px;
+input, textarea{
+padding:10px;
+margin:8px 0;
+width:100%;
+box-sizing:border-box;
+border:none;
+border-radius:5px;
 }
 
-footer {
-    background: black;
-    color: #00e5ff;
-    text-align: center;
-    padding: 20px;
+button{
+padding:10px;
+margin-top:10px;
+width:100%;
+cursor:pointer;
+background:#1e90ff;
+color:white;
+border:none;
+border-radius:5px;
+}
+
+button:hover{ background:#187bcd; }
+
+.forgot-link{
+color:#1e90ff;
+cursor:pointer;
+font-size:14px;
+display:block;
+margin-top:10px;
+}
+
+.back-btn{
+position:fixed;
+right:20px;
+bottom:20px;
+width:55px;
+height:55px;
+background:#e74c3c;
+color:white;
+border:none;
+border-radius:50%;
+font-size:14px;
+cursor:pointer;
+display:none;
+align-items:center;
+justify-content:center;
+box-shadow:0 5px 15px rgba(0,0,0,0.4);
+z-index:1000;
+}
+
+.footer{
+background:#08131a;
+text-align:center;
+padding:15px;
 }
 </style>
-
 </head>
 
 <body>
 
-<header id="Home">
-    <h1>Balemlay Zerihun</h1>
-    <p>Web Developer | Computer Science | Student at University</p>
-    
-</header>
-
-<div class="menu">
-    <a href="#Home">🏠<br>Home</a>
-    <a href="#about">👤<br>About me</a>
-    <a href="#skills">🛠<br>Skills</a>
-    <a href="#projects">💻<br>Projects</a>
-    <a href="#contact">📞<br>Contact</a> 
+<div class="header">
+<img src="https://via.placeholder.com/120" class="profile-photo" onclick="changePhoto()">
+<input type="file" id="profileInput" accept="image/*">
+<h2>Balemlay Zerihun</h2>
+<p id="welcomeText">Wellcome To My Portfolio Thanks For Vist !</p>
 </div>
 
-<section id="about me">
-    <h2>About Me</h2>
-    <p>
-        I am Balemlay Zerihun, a creative web developer from Ethiopia. I love building websites and software systems that solve real problems. I enjoy working with databases, designing user-friendly interfaces, and developing management systems.
-    </p>
-    <p>
-        I am always learning new technologies and improving my skills to become a professional web Developer.
-    </p>
-</section>
+<div class="menu" id="mainMenu">
+<a href="#" onclick="showSection('home')">Home</a>
+<a href="#" onclick="showSection('projects')">Projects</a>
+<a href="#" onclick="showSection('photos')">Photos</a>
+<a href="#" onclick="showSection('history')">History</a>
+<a href="#" onclick="showSection('skill')">Skill</a>
+<a href="#" onclick="showSection('plann')">Plann</a>
+<a href="#" onclick="showSection('contact')">Contact</a>
+</div>
 
-<section id="skills">
-    <h2>My Skills</h2>
-    <ul>
-        <li>HTML, CSS, JavaScript</li>
-        <li>PHP & MySQL</li>
-        <li>Website Design</li>
-        <li>System Development</li>
-        <li>Database Management</li>
-    </ul>
-</section>
+<div id="welcome" class="section active">
+<button class="login-corner-btn" onclick="showSection('login')">Login</button>
+<h2>         👆  </h2>
+<p>Pleace Click The Above Login Button And Login To My Portfolio To See Detaile About Me.</p>
+</div>
 
-<section id="projects">
-    <h2>My Projects</h2>
+<div id="login" class="section">
+<div class="card">
+<h2>Login</h2>
+<input type="text" id="loginUser" placeholder="Username">
+<input type="password" id="loginPass" placeholder="Password">
+<button onclick="login()">Login</button>
 
-    <div class="project">
-        <h3>Airport Management System</h3>
-        <p>Online flight booking and airport control system.</p>
-    </div>
+<span class="forgot-link" onclick="showSection('forgot')">Forgot Password?</span>
+</div>
+</div>
 
-    <div class="project">
-        <h3>Student Management System</h3>
-        <p>Database-based student information management.</p>
-    </div>
+<!-- FORGOT PASSWORD SECTION -->
+<div id="forgot" class="section">
+<div class="card">
+<h2>Recover Password</h2>
+<input type="email" id="recoverEmail" placeholder="Enter your email">
+<button onclick="recoverPassword()">Recover</button>
+</div>
+</div>
 
-    <div class="project">
-        <h3>Portfolio Website</h3>
-        <p>Personal website to show my skills and projects.</p>
-    </div>
-</section>
+<div id="home" class="section">
+<h2>Dashboard</h2>
+<p>You are logged in successfully.</p>
+<button onclick="logout()">Logout</button>
+</div>
 
-<section id="contact">
-    <h2>Contact Me</h2>
-    <p>Email: balemlayzerihun943@gmail.com</p>
-    <p>Phone: +251934918778</p>
-    <p>Address:Ethiopia, Amhara Region ③,🏢 City Debre Markos</p>
+<div id="projects" class="section">
+<h2>Projects</h2>
+<p>Your projects will appear here.</p>
+</div>
 
-    <h3>Social Media</h3>
-    <div class="social">
-        <a > ✅Telegram contact username=
-            👉Balem_ye_19;
-        </a>
-    </div>
-    <p>🔎with the above username in your telegram and you can chat me.</p>
-</section>
+<div id="photos" class="section">
+<h2>Photo Gallery</h2>
+<input type="file" id="galleryInput" multiple>
+<div id="gallery"></div>
+</div>
 
-<footer>
-    <p>© 2026 Balemlay Zerihun | All Rights Reserved</p>
-</footer>
+<div id="history" class="section">
+<h2>History</h2>
+<textarea id="historyText" placeholder="Write your history..."></textarea>
+<button onclick="saveHistoryText()">Save Text</button>
+<div id="historyList"></div>
+</div>
+
+<div id="skill" class="section">
+<h2>Skill</h2>
+<textarea id="skillText" placeholder="Write your skills..."></textarea>
+<button onclick="saveSkillText()">Save Text</button>
+</div>
+
+<div id="plann" class="section">
+<h2>Plann</h2>
+<textarea id="plannText" placeholder="Write your plans..."></textarea>
+<button onclick="savePlannText()">Save Text</button>
+</div>
+
+<div id="contact" class="section">
+<h2>Contact</h2>
+<p>Email: balemlayzerihun934@gmail.com</p>
+</div>
+
+<button class="back-btn" onclick="goBack()">Back</button>
+
+<div class="footer">
+© 2026 Balemlay Zerihun | All Rights Reserved
+</div>
+
+<script>
+
+let users = { admin: "1234" };
+let currentUser = null;
+let previousSection = "welcome";
+
+document.addEventListener("DOMContentLoaded", function(){
+loadProfilePhoto();
+});
+
+function loadProfilePhoto(){
+let savedPhoto = localStorage.getItem("profilePhoto");
+if(savedPhoto){
+document.querySelector(".profile-photo").src = savedPhoto;
+}else{
+document.querySelector(".profile-photo").src = "https://via.placeholder.com/120";
+}
+}
+
+function changePhoto(){
+document.getElementById("profileInput").click();
+}
+
+document.getElementById("profileInput").addEventListener("change", function(){
+let file = this.files[0];
+if(file){
+let reader = new FileReader();
+reader.onload = function(e){
+document.querySelector(".profile-photo").src = e.target.result;
+localStorage.setItem("profilePhoto", e.target.result);
+};
+reader.readAsDataURL(file);
+}
+});
+
+function showSection(id){
+previousSection = document.querySelector(".section.active")?.id || "welcome";
+document.querySelectorAll(".section").forEach(sec=>sec.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+function goBack(){ showSection(previousSection); }
+
+function login(){
+let u=document.getElementById("loginUser").value;
+let p=document.getElementById("loginPass").value;
+
+if(users[u]===p){
+currentUser=u;
+document.getElementById("mainMenu").style.display="flex";
+document.getElementById("welcomeText").innerText="Welcome, "+u;
+showSection("home");
+}else{
+alert("Invalid login!");
+}
+}
+
+function logout(){
+currentUser=null;
+document.getElementById("mainMenu").style.display="none";
+document.getElementById("welcomeText").innerText="Welcome to My Portfolio";
+showSection("welcome");
+}
+
+/* NEW FORGOT PASSWORD FUNCTION */
+function recoverPassword(){
+let email = document.getElementById("recoverEmail").value;
+
+if(email === "balemlayzerihun934@gmail.com"){
+alert("Your password is: 1234");
+showSection("login");
+}else{
+alert("Email not found!");
+}
+}
+
+function saveHistoryText(){
+let text=document.getElementById("historyText").value;
+if(text==="") return;
+
+let container=document.createElement("div");
+container.style.margin="5px";
+
+let p=document.createElement("span");
+p.innerText=text + " ";
+
+let delBtn=document.createElement("button");
+delBtn.innerText="Delete";
+delBtn.style.width="auto";
+delBtn.style.padding="5px 10px";
+delBtn.style.marginLeft="10px";
+delBtn.style.background="#e74c3c";
+delBtn.onclick=function(){ container.remove(); };
+
+container.appendChild(p);
+container.appendChild(delBtn);
+document.getElementById("historyList").appendChild(container);
+document.getElementById("historyText").value="";
+}
+
+</script>
 
 </body>
 </html>
