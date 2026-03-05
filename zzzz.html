@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Balemlay Zerihun | Portfolio</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ================= SKILL GRAPH ================= */
+
+      .histogram-wrapper {
+        position: relative;
+        padding: 20px;
+        border-bottom: 2px solid #08f928;
+      }
+
+      /* Y axis numbers */
+      .axis-y {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #08f928;
+      }
+
+      /* Graph area */
+      .histogram {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+        height: 300px;
+        margin-left: 40px;
+        border-left: 2px solid #08f928;
+      }
+
+      /* Each column */
+      .column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      /* Bars */
+      .bar {
+        width: 50px;
+        height: 0;
+        border-radius: 5px 5px 0 0;
+        transition: height 1.5s ease;
+      }
+
+      /* Bar colors */
+      .bar1 {
+        background: red;
+      }
+      .bar2 {
+        background: lime;
+      }
+      .bar3 {
+        background: blue;
+      }
+      .bar4 {
+        background: yellow;
+      }
+      .bar5 {
+        background: purple;
+      }
+
+      /* Skill text */
+      .column p {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #08f928;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+        scroll-behavior: auto;
+      }
+
+      body {
+        background: BLACK;
+        color: #08f928;
+      }
+
+      /* HEADER */
+
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 8%;
+        background: black;
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+      }
+
+      /* LEFT */
+
+      .left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* LOGO */
+
+      .logo img {
+        width: 85px;
+        height: 85px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid hwb(355 0% 95%);
+      }
+
+      /* NAME */
+
+      .name {
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      /* RIGHT */
+
+      .right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .menu-icon span {
+        width: 25px;
+        height: 3px;
+        background: white;
+        border-radius: 5px;
+        transition: 0.3s;
+      }
+
+      .menu-icon.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .menu-icon.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-icon.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+      }
+
+      /* NAV */
+
+      nav {
+        display: flex;
+        gap: 18px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #05f4ff;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      nav a:hover {
+        color: GREEN;
+      }
+
+      /* HERO */
+
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        background: linear-gradient(180deg, #020610, #063603);
+      }
+
+      .hero h1 {
+        font-size: 50px;
+      }
+
+      .hero h2 {
+        margin: 15px 0;
+        color: #ff1606;
+      }
+
+      .hero p {
+        max-width: 600px;
+        margin: auto;
+        opacity: 0.85;
+      }
+
+      .btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 5px 15px;
+        background: #0550f4;
+        color: #020610;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 600;
+      }
+
+      /* SECTIONS */
+
+      section {
+        padding: 100px 8%;
+        min-height: 100vh;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #ff1606;
+      }
+
+      .card {
+        padding: 20px;
+        border-radius: 10px;
+        background: #015256;
+        margin-top: 15px;
+      }
+
+      /* CONTACT */
+
+      .contact-links a {
+        display: block;
+        margin: 12px 0;
+        padding: 12px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        text-decoration: none;
+        color: #08f928;
+        transition: 0.3s;
+      }
+
+      .contact-links a:hover {
+        background: #2563eb;
+        transform: translateX(5px);
+      }
+
+      /* FOOTER */
+
+      footer {
+        background: BLACK;
+        padding: 30px;
+        text-align: center;
+      }
+      .menu-icon {
+        display: none;
+      }
+      /* MOBILE */
+      @media (max-width: 768px) {
+        .menu-icon {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          cursor: pointer;
+        }
+
+        nav {
+          position: absolute;
+          top: 70px;
+          right: 8%;
+          background: #111827;
+          flex-direction: column;
+          padding: 20px;
+          border-radius: 10px;
+          display: none;
+        }
+
+        nav.active {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="left">
+        <div class="logo">
+          <img src="b3.jpg" />
+        </div>
+
+        <div class="name">Balemlay Zerihun</div>
+      </div>
+
+      <div class="right">
+        <div class="menu-icon" id="menuBtn" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <nav id="nav">
+          <a href="#home">🏠Home</a>
+          <a href="#about">👤About</a>
+          <a href="#education">🎓Education</a>
+          <a href="#skill">💻Skill</a>
+          <a href="#service">🛠Service</a>
+          <a href="#project">📂Project</a>
+          <a href="#contact">📞Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HOME -->
+
+    <section id="home" class="hero">
+      <div>
+        <h1>Hi👋,it's me</h1>
+        <h2><span id="typing"></span></h2>
+
+        <p>
+          Welcome to my portfolio. I am passionate about software development,
+          system design, and building real-world applications.
+        </p>
+
+        <br /><br />
+
+        <a href="#project" class="btn">View My Projects</a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About</h2>
+      <div class="card">
+        My Name is Balemlay Zerihun, and I am a third-year Computer Science
+        student at the university. I have a strong passion for technology,
+        software development, and innovation. From the beginning of my academic
+        journey, I have been motivated to understand how computer systems work
+        and how modern applications are built. Throughout my studies, I have
+        developed knowledge in programming fundamentals, problem-solving, and
+        system design. I am currently improving my skills in web development
+        using HTML, CSS, and JavaScript, and I am continuously learning new
+        technologies to strengthen my technical background. I enjoy working on
+        practical projects because they help me apply theoretical knowledge in
+        real-world situations. I am a dedicated, disciplined, and hardworking
+        individual who believes in continuous learning and self-improvement. My
+        goal is to become a highly skilled software engineer capable of
+        developing efficient, modern, and user-friendly applications.
+      </div>
+    </section>
+    <!-- EDUCATION -->
+    <section id="education">
+      <h2>Education</h2>
+      <div class="card">
+        <h3>Bachelor of Science in Computer Science</h3>
+        <p><b>University:</b> Your University Name</p>
+        <p><b>Status:</b> Third-Year Student</p>
+        <p><b>Expected Graduation:</b> 2027</p>
+
+        <br />
+
+        <h4>Academic Focus</h4>
+        <p>
+          My studies focus on the theoretical and practical aspects of computer
+          science. I am learning how software systems are designed, developed,
+          and maintained. Through coursework and projects, I am strengthening my
+          programming, problem-solving, and system development skills.
+        </p>
+
+        <br />
+
+        <h4>Main Courses Studied</h4>
+        <ul style="margin-left: 20px; line-height: 1.8">
+          <li>Programming Fundamentals</li>
+          <li>Data Structures and Algorithms</li>
+          <li>Object-Oriented Programming</li>
+          <li>Database Systems</li>
+          <li>Operating Systems</li>
+          <li>Computer Networks</li>
+          <li>Software Engineering</li>
+          <li>Web Development</li>
+        </ul>
+
+        <br />
+
+        <h4>Academic Projects</h4>
+        <ul style="margin-left: 20px; line-height: 1.8">
+          <li>Bank Management System</li>
+          <li>Ethio Telecom Worker Management System</li>
+          <li>ATM System Simulation</li>
+          <li>Airport Passenger Feedback System (Ongoing)</li>
+        </ul>
+
+        <br />
+
+        <h4>Learning Goals</h4>
+        <p>
+          My goal is to become a professional software engineer who can design
+          efficient systems and build modern applications that solve real-world
+          problems. I continuously improve my knowledge through coding practice,
+          personal projects, and technology research.
+        </p>
+      </div>
+    </section>
+
+    <section id="skill">
+      <h2>Skills</h2>
+
+      <div class="card">
+        <div class="histogram-wrapper">
+          <!-- Y Axis Numbers -->
+          <div class="axis-y">
+            <span>100</span>
+            <span>80</span>
+            <span>60</span>
+            <span>40</span>
+            <span>20</span>
+            <span>0</span>
+          </div>
+
+          <!-- Graph -->
+          <div class="histogram">
+            <div class="column">
+              <div class="bar bar1" data-height="70"></div>
+              <p>Java</p>
+            </div>
+
+            <div class="column">
+              <div class="bar bar2" data-height="85"></div>
+              <p>Python</p>
+            </div>
+
+            <div class="column">
+              <div class="bar bar3" data-height="75"></div>
+              <p>OOP</p>
+            </div>
+
+            <div class="column">
+              <div class="bar bar4" data-height="90"></div>
+              <p>System</p>
+            </div>
+
+            <div class="column">
+              <div class="bar bar5" data-height="85"></div>
+              <p>Problem</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        style="
+          margin-top: 25px;
+          line-height: 1.7;
+          color: #08f928;
+          font-size: 15px;
+        "
+      >
+        I have developed strong foundational skills in several areas of computer
+        science and software development. I am comfortable working with
+        programming languages such as <b>Java</b> and <b>Python</b>, which I use
+        to build logical solutions and small applications. My understanding of
+        <b>Object-Oriented Programming (OOP)</b> allows me to design organized
+        and reusable code structures. I also have knowledge of
+        <b>system development</b> and how software systems are designed and
+        implemented. In addition, I have strong <b>problem-solving skills</b>,
+        which help me analyze complex problems and develop efficient solutions.
+        I am continuously practicing and improving my programming and
+        development skills by working on academic and personal projects.
+      </div>
+    </section>
+
+    <!-- SERVICE -->
+
+    <section id="service">
+      <h2>Services</h2>
+      <div class="card">
+        <h3>🌐 Front-End Web Development</h3>
+        <p>
+          I create responsive and modern websites using HTML, CSS, and
+          JavaScript. I design clean user interfaces that work on mobile,
+          tablet, and desktop devices.
+        </p>
+
+        <br />
+
+        <h3>🖥 Software Development</h3>
+        <p>
+          I develop desktop and system-based applications using programming
+          languages such as Java and Python. I focus on writing clean,
+          efficient, and well-structured code.
+        </p>
+
+        <br />
+
+        <h3>🗄 Database Design</h3>
+        <p>
+          I design and manage databases for applications, including system
+          modeling, data organization, and basic SQL operations.
+        </p>
+
+        <br />
+
+        <h3>📊 System Analysis & Design</h3>
+        <p>
+          I analyze project requirements and design system structures before
+          development, ensuring organized and scalable solutions.
+        </p>
+
+        <br />
+
+        <h3>🐞 Debugging & Code Improvement</h3>
+        <p>
+          I help identify and fix errors in code, improve performance, and
+          optimize program structure.
+        </p>
+
+        <br />
+
+        <h3>🎓 Academic Project Development</h3>
+        <p>
+          I assist students with school and university projects, including
+          system documentation, implementation, and presentation preparation.
+        </p>
+
+        <br />
+
+        <h3>🚀 Continuous Learning & Technology Adaptation</h3>
+        <p>
+          I am always learning new technologies to improve my skills and provide
+          modern and efficient solutions.
+        </p>
+      </div>
+    </section>
+
+    <!-- PROJECT -->
+
+    <section id="project">
+      <h2>Projects</h2>
+
+      <div class="card">
+        <h3>💳 ATM System</h3>
+        <p>
+          The ATM System project was designed to simulate real banking machine
+          operations. It includes user login authentication, balance checking,
+          money withdrawal, and deposit functionality. This project helped me
+          understand logical flow, security concepts, input validation, and
+          structured programming. It improved my ability to design real-world
+          financial system logic.
+        </p>
+
+        <br />
+
+        <h3>🏦 Bank Management System</h3>
+        <p>
+          This system was developed to manage customer accounts, transactions,
+          and basic banking operations. It allows adding new customers, updating
+          account information, checking balances, and recording transactions.
+          Through this project, I gained experience in system design, data
+          organization, and application structure.
+        </p>
+
+        <br />
+
+        <h3>📡 Ethio Telecom Worker Management System</h3>
+        <p>
+          This project focuses on managing employee records, roles, department
+          information, and administrative data. It demonstrates my understanding
+          of database structure, record management, and system organization. The
+          project improved my skills in designing management systems that handle
+          structured data efficiently.
+        </p>
+
+        <br />
+
+        <h3>✈ Airport Passenger Feedback System (Ongoing)</h3>
+        <p>
+          Currently developing a Passenger Feedback System for airports. The
+          system allows passengers to submit feedback about services, report
+          issues, and provide suggestions for improvement. This project focuses
+          on user interface design, data collection, system validation, and
+          improving service quality. It is helping me strengthen my full project
+          development skills.
+        </p>
+
+        <br />
+
+        <h3>🚀 Future Development Goals</h3>
+        <p>
+          In future projects, I plan to build more advanced web-based systems,
+          integrate databases with applications, and develop modern responsive
+          platforms using advanced technologies. I aim to create scalable,
+          secure, and user-friendly systems.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+
+      <div class="card contact-links">
+        <a href="mailto:balemlayzerihun934@gmail.com">
+          📧 Email: balemlayzerihun934@gmail.com
+        </a>
+
+        <a href="tel:+251934918778"> 📱 Phone: 251934918778 </a>
+
+        <a href="https://t.me/Balem_ye27" target="_blank">
+          ✈ Telegram: Balem_ye27
+        </a>
+        <a href="https://www.instagram.com/instaBALEM_1994" target="_blank">
+          📷 Instagram: instaBALEM_1994
+        </a>
+        <a href="https://www.facebook.com/Balemlay.zerihun" target="_blank">
+          📘 Facebook: Balemlay.zerihun
+        </a>
+      </div>
+    </section>
+
+    <footer>© 2026 Balemlay Zerihun | All Rights Reserved</footer>
+
+    <script>
+      /* MENU */
+
+      // Make bars visible
+      const bars = document.querySelectorAll(".bar");
+
+      function animateBars() {
+        bars.forEach((bar) => {
+          const value = parseInt(bar.getAttribute("data-height"));
+
+          // Safety limit (0–100)
+          const safeValue = Math.max(0, Math.min(value, 100));
+
+          bar.style.height = "0px";
+
+          setTimeout(() => {
+            bar.style.height = safeValue * 3 + "px";
+          }, 200);
+        });
+      }
+
+      // Run when page loads
+      window.addEventListener("load", animateBars);
+
+      function toggleMenu() {
+        document.getElementById("nav").classList.toggle("active");
+        document.getElementById("menuBtn").classList.toggle("active");
+      }
+
+      /* TYPING */
+      const texts = [
+        "I am a Computer Science💻 | Student 🎓| Software Developer 🧑‍💻",
+      ];
+
+      let i = 0;
+      let j = 0;
+      const typing = document.getElementById("typing");
+
+      function type() {
+        if (j < texts[i].length) {
+          typing.innerHTML += texts[i].charAt(j);
+          j++;
+          setTimeout(type, 180);
+        } else {
+          setTimeout(erase, 1500);
+        }
+      }
+
+      function erase() {
+        if (j > 0) {
+          typing.innerHTML = texts[i].substring(0, j - 1);
+          j--;
+          setTimeout(erase, 300);
+        } else {
+          i++;
+          if (i >= texts.length) {
+            i = 0;
+          }
+          setTimeout(type, 500);
+        }
+      }
+
+      type();
+    </script>
+  </body>
+</html>
